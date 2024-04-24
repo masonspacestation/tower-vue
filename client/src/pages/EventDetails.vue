@@ -18,6 +18,25 @@ async function getTowerEventById() {
     Pop.toast('Could not get event by Id', 'error');
   }
 }
+
+
+async function cancelEvent() {
+  try {
+    // const eventId = route.params.eventId
+    await towerEventsService.cancelEvent(route.params.eventId)
+  } catch (error) {
+    Pop.toast('Could not cancel event details', 'error')
+  }
+}
+// async function updateEvent() {
+//   try {
+//     const eventId = route.params.eventId
+//     await towerEventsService.updateEvent(eventId)
+//   } catch (error) {
+//     Pop.toast('Could not update event details', 'error')
+//   }
+// }
+
 onBeforeMount(() => {
   getTowerEventById()
 })
@@ -32,10 +51,13 @@ onBeforeMount(() => {
     <div class="container mt-3">
       <section class="row justify-content-center">
         <div class="col-10 w-100 rounded cover-img" alt=""></div>
-        <div class="row px-0 justify-content-start align-items-center">
-
-          <h2 class="w-auto my-2 me-3">{{ towerEvent.name }}</h2>
-          <span class="rounded bg-success my-2 px-3 p-1 w-auto fs-6">{{ towerEvent.type }}</span>
+        <div class="row px-0 justify-content-between align-items-center">
+          <button @click="cancelEvent()">Cancel Event</button>
+          <!-- <button @click="updateEvent()">Update Event</button> -->
+          <div>
+            <h2 class="w-auto my-2 me-3">{{ towerEvent.name }}</h2>
+            <span class="rounded bg-success my-2 px-3 p-1 w-auto fs-6">{{ towerEvent.type }}</span>
+          </div>
         </div>
         <p>{{ towerEvent.description }}</p>
       </section>

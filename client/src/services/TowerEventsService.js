@@ -7,6 +7,19 @@ import { api } from "./AxiosService.js"
 
 
 class TowerEventsService{
+  async cancelEvent(eventId) {
+    const response = await api.put(`api/events/${eventId}`)
+    console.log('Event to cancel', response.data);
+    // const eventToCancel = AppState.towerEvents.find(event => event.id == eventId)
+    // const eventToCancel = new TowerEvent(response.data)
+    // console.log('this one', eventToCancel);
+AppState.activeTowerEvent.isCanceled = !AppState.activeTowerEvent.isCanceled
+console.log('canceled', AppState.activeTowerEvent);
+  }
+  async updateEvent(eventId) {
+    const response = await api.put(`api/events/${eventId}`)
+    console.log('Event to update', response.data);
+  }
   async createNewEvent(newEventData) {
     const response = await api.post('api/events', newEventData)
    console.log('creating new event', response.data);
