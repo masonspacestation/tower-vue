@@ -2,7 +2,7 @@
 import { useRoute } from "vue-router";
 import Pop from "../utils/Pop.js";
 import { towerEventsService } from "../services/TowerEventsService.js";
-import { computed, onMounted } from "vue";
+import { computed, onBeforeMount, onMounted } from "vue";
 import { AppState } from "../AppState.js";
 
 
@@ -11,18 +11,17 @@ const route = useRoute()
 const towerEvent = computed(() => AppState.activeTowerEvent)
 const bgImage = computed(() => `url(${AppState.activeTowerEvent?.coverImg})`)
 
-onMounted(() => {
-  getTowerEventById()
-})
-
 async function getTowerEventById() {
   try {
     await towerEventsService.getTowerEventById(route.params.eventId)
-  }
-  catch (error) {
+  } catch (error) {
     Pop.toast('Could not get event by Id', 'error');
   }
 }
+onBeforeMount(() => {
+  getTowerEventById()
+})
+
 
 </script>
 
