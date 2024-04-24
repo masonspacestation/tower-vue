@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { AppState } from "../AppState.js";
 import { TowerEvent } from "../models/TowerEvent.js";
 import { api } from "./AxiosService.js"
@@ -9,6 +10,8 @@ class TowerEventsService{
   async getTowerEventById(eventId) {
     const response = await api.get(`api/events/${eventId}`)
     console.log('found event', response.data);
+    const activeTowerEvent = new TowerEvent(response.data)
+    AppState.activeTowerEvent = activeTowerEvent
   }
 
 

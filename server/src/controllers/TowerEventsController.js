@@ -10,8 +10,21 @@ export class TowerEventsController extends BaseController {
     super('api/events')
     this.router
       .get('', this.getTowerEvents)
+      .get('/:eventId', this.getTowerEventById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createTowerEvent)
+  }
+
+
+  async getTowerEventById(request, response, next) {
+    try {
+      const eventId = request.params.eventId
+      const towerEvent = await towerEventsService.getTowerEventById(eventId)
+      response.send(towerEvent)
+    } catch (error) {
+      next(error)
+
+    }
   }
 
 

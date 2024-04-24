@@ -13,7 +13,8 @@ tickets: null,
 /**@type {TowerEvent[]} */
 towerEvents:[],
 
-
+/**@type {TowerEvent} */
+activeTowerEvent: null
 
 
 })

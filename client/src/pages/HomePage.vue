@@ -24,6 +24,9 @@ async function getEvents() {
 <template>
 
   <div class="container mt-3">
+    <section class="row">
+      <NewEventForm />
+    </section>
     <section class="row p-3">
       <h3 class="text-start">Upcoming Events</h3>
 
