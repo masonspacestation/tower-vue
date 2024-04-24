@@ -4,6 +4,7 @@ import { ref } from "vue";
 import { towerEventsService } from "../services/TowerEventsService.js";
 import Pop from "../utils/Pop.js";
 import { useRouter } from "vue-router";
+import { Modal } from "bootstrap";
 
 const router = useRouter()
 
@@ -34,8 +35,9 @@ async function createNewEvent() {
   try {
     const newEvent = await towerEventsService.createNewEvent(liveEventData.value)
     resetForm()
-    console.log('success ✊');
-    // router.push({ name: 'EventDetails', params: { eventId: newEvent.id } })
+    Modal.getOrCreateInstance('#create-event-modal').hide()
+    Pop.toast('New event created!', 'success');
+    router.push({ name: 'Event Details', params: { eventId: newEvent.id } })
   }
   catch (error) {
     Pop.toast('Could not create new event', 'error');
@@ -51,29 +53,28 @@ async function createNewEvent() {
     <form @submit.prevent="createNewEvent()">
       <div class="row">
 
-        <div class="col-4 mb-1 h-auto">
+        <div class="col-sm-4 mb-1 h-auto">
           <label for="event-name"></label>
           <input v-model="liveEventData.name" type="text" minlength="3" maxlength="50" name="event-name" id="event-name"
             class="form-control" placeholder="Event Name" required>
         </div>
 
-        <div class="col-4 mb-1 h-auto">
+        <div class="col-sm-4 mb-1 h-auto">
           <label for="event-date"></label>
           <input v-model="liveEventData.startDate" type="date" name="event-date" id="event-date" class="form-control"
             required>
         </div>
 
-        <div class="col-4 mb-1 h-auto">
+        <div class="col-sm-4 mb-1 h-auto">
           <label for="event-location"></label>
           <input v-model="liveEventData.location" type="text" minlength="1" maxlength="500" name="event-location"
             id="event-location" class="form-control" placeholder="Event Location" required>
         </div>
 
-        <div class="col-4 mb-1 h-auto">
+        <div class="col-sm-4 mb-1 h-auto">
           <label for="event-type"></label>
-          <select v-model="liveEventData.type" type="text" name="event-type" id="event-type" class="form-control"
-            required>
-            <option value="" disabled>Select Event Type</option>
+          <select v-model="liveEventData.type" name="event-type" id="event-type" class="form-control" required>
+            <option value="" disabled selected>Select Event Type</option>
             <option value="concert">Concert</option>
             <option value="convention">Convention</option>
             <option value="sport">Sport</option>
@@ -81,13 +82,13 @@ async function createNewEvent() {
           </select>
         </div>
 
-        <div class="col-4 mb-1 h-auto">
+        <div class="col-sm-4 mb-1 h-auto">
           <label for="event-capacity"></label>
           <input v-model="liveEventData.capacity" type="number" min="3" max="5000" name="event-capacity"
             id="event-capacity" class="form-control" placeholder="Event Capacity" required>
         </div>
 
-        <div class="col-4 mb-1 h-auto">
+        <div class="col-sm-4 mb-1 h-auto">
           <label for="event-coverImg"></label>
           <input v-model="liveEventData.coverImg" type="url" name="event-coverImg" id="event-coverImg"
             class="form-control" placeholder="Cover Image Url" required>
@@ -96,7 +97,7 @@ async function createNewEvent() {
         <div class="col-12 mb-1 h-auto">
           <label for="event-description"></label>
 
-          <textarea v-model="liveEventData.description" rows="5" type="text" min="15" max="1000"
+          <textarea v-model="liveEventData.description" rows="5" type="text" minLength="15" maxLength="1000"
             name="event-description" id="event-description" class="form-control" placeholder="Event Description"
             required>
           </textarea>
@@ -108,6 +109,7 @@ async function createNewEvent() {
           Create Event</button></div>
     </form>
   </div>
+
 </template>
 
 

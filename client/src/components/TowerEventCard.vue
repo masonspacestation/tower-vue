@@ -11,16 +11,16 @@ const bgStyle = computed(() => `url(${props.towerEvent.coverImg})`)
 
 <template>
   <RouterLink :to="{ name: 'Event Details', params: { eventId: towerEvent.id } }">
-    <div class="rounded event-card mb-4 justify-content-between">
-      <div class="row m-0 justify-content-end">
-        <!-- <h4 class="my-2 text-end m-0 p-1 bg-success">{{ towerEvent.type }}</h4> -->
-        <!-- <h4 class="m-0 w-auto text-end bg-success rounded"><i class="mdi mdi-bike"></i></h4> -->
-        <div class="m-0 p-1 w-auto rounded text-end bg-success"><i class="mdi mdi-soccer"></i></div>
+    <section class="mb-4">
+      <div class="rounded event-card mb-0 justify-content-between">
+        <div class="row m-0 justify-content-end">
+          <div class="m-0 p-1 w-auto rounded text-end bg-success"><i class="mdi mdi-soccer"></i></div>
+        </div>
+        <div class="row">
+        </div>
       </div>
-      <div class="row">
-      </div>
-    </div>
-    <h4 class="my-2">{{ towerEvent.name }}</h4>
+      <h4 class="my-2 fs-5 fw-medium">{{ towerEvent.name }}</h4>
+    </section>
 
   </RouterLink>
 </template>
@@ -32,5 +32,10 @@ const bgStyle = computed(() => `url(${props.towerEvent.coverImg})`)
   background-image: v-bind(bgStyle);
   background-position: center;
   background-size: cover;
+  text-decoration: none;
+}
+
+h4 {
+  text-decoration: none;
 }
 </style>
