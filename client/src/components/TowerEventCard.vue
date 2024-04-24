@@ -1,18 +1,36 @@
 <script setup>
+import { computed } from "vue";
+import { TowerEvent } from "../models/TowerEvent.js";
 
+
+const props = defineProps({ towerEvent: { type: TowerEvent, required: true } })
+
+const bgStyle = computed(() => `url(${props.towerEvent.coverImg})`)
 </script>
 
 
 <template>
-  <div class="col-4">
-    <div class="card text-start">
-      <!-- <img class=""
-        src="https://images.unsplash.com/photo-1565733362858-3c610e8044cc?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c25vd2JvYXJkaW5nfGVufDB8fDB8fHww"
-        alt=""> -->
-      <h4>Let's Shred</h4>
+  <RouterLink :to="{ name: 'Event Details', params: { eventId: towerEvent.id } }">
+    <div class="rounded event-card mb-4 justify-content-between">
+      <div class="row m-0 justify-content-end">
+        <!-- <h4 class="my-2 text-end m-0 p-1 bg-success">{{ towerEvent.type }}</h4> -->
+        <!-- <h4 class="m-0 w-auto text-end bg-success rounded"><i class="mdi mdi-bike"></i></h4> -->
+        <div class="m-0 p-1 w-auto rounded text-end bg-success"><i class="mdi mdi-soccer"></i></div>
+      </div>
+      <div class="row">
+      </div>
     </div>
-  </div>
+    <h4 class="my-2">{{ towerEvent.name }}</h4>
+
+  </RouterLink>
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.event-card {
+  height: 20dvh;
+  background-image: v-bind(bgStyle);
+  background-position: center;
+  background-size: cover;
+}
+</style>

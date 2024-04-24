@@ -22,27 +22,17 @@ async function getEvents() {
 </script>
 
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
 
-    <div class="container">
-      <section class="row p-3">
-        <h3 class="text-start">Upcoming Events</h3>
-        <section v-for="towerEvent in towerEvents" :key="towerEvent.id">
-          <TowerEventCard />
-          <!-- <div class="col-4">
-    <div class="card text-start">
-      <img class=""
-      src="https://images.unsplash.com/photo-1565733362858-3c610e8044cc?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c25vd2JvYXJkaW5nfGVufDB8fDB8fHww"
-      alt="">
-      <h4>Let's Shred</h4>
-    </div>
-  </div> -->
+  <div class="container mt-3">
+    <section class="row p-3">
+      <h3 class="text-start">Upcoming Events</h3>
+
+      <section class="col-4" v-for="towerEvent in towerEvents" :key="towerEvent.id">
+        <TowerEventCard :towerEvent="towerEvent" />
 
 
-
-        </section>
       </section>
-    </div>
+    </section>
 
   </div>
 </template>

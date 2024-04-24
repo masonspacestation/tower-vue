@@ -6,6 +6,12 @@ import { api } from "./AxiosService.js"
 
 
 class TowerEventsService{
+  async getTowerEventById(eventId) {
+    const response = await api.get(`api/events/${eventId}`)
+    console.log('found event', response.data);
+  }
+
+
   async getEvents() {
     const response = await api.get('api/events')
     console.log('events!', response.data);
