@@ -10,6 +10,7 @@ export class Ticket{
   this.id = data.id
   this.accountId = data.accountId
   this.eventId = data.eventId
+  
   this.createdAt = new Date(data.createdAt)
   this.updatedAt = new Date(data.updatedAt)
   this.profile = data.profile ? new Profile(data.profile) : null
