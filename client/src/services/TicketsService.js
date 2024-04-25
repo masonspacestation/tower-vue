@@ -9,8 +9,8 @@ class TicketsService{
   async getTicketHolders(eventData) {
     const response = await api.get(`api/events/${eventData}/tickets`)
     console.log('tickets!', response.data);
-    // const towerEvents = response.data.map(towerEventsData => new TowerEvent(towerEventsData))
-    // AppState.towerEvents = towerEvents
+    const tickets = response.data.map(eventData => new Ticket(eventData))
+    AppState.tickets = tickets
   }
   async createTicket(eventData) {
     const response = await api.post('api/tickets', eventData)

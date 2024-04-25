@@ -5,7 +5,7 @@ import { towerEventsService } from "../services/TowerEventsService.js";
 import { computed, onBeforeMount, onMounted } from "vue";
 import { AppState } from "../AppState.js";
 import { ticketsService } from "../services/TicketsService.js";
-
+import CanceledIndicator from "../components/CanceledIndicator.vue";
 
 
 const route = useRoute()
@@ -87,9 +87,7 @@ onBeforeMount(() => {
       <section class="row justify-content-center">
 
         <div class="col-10 w-100 rounded cover-img" alt="">
-          <div v-if="towerEvent?.isCanceled == true" class="row justify-content-end align-items-bottom">
-            <span class="rounded bg-danger my-2 me-3 px-3 p-1 w-auto fs-6">CANCELED</span>
-          </div>
+          <CanceledIndicator :towerEvent="towerEvent" />
         </div>
         <!-- SECTION title -->
         <div class="row my-3 px-0 justify-content-start align-items-center">
@@ -135,13 +133,19 @@ onBeforeMount(() => {
             <div class="bg-secondary rounded p-3 text-center mb-3">
               <h5>Interested in going?</h5>
               <p>Get a free ticket!</p>
-              <button :disabled="ticketHolder != undefined" class="btn w-100 btn-success"
-                @click="createTicket()">Attend!</button>
+              <div v-if="!ticketHolder">
+                <button class="btn w-100 btn-success" @click="createTicket()">Attend!</button>
+              </div>
             </div>
             <h6 class="w-100 text-end"><span class="text-success">{{ towerEvent.capacity }}</span> spots left</h6>
             <div>
               <h5>Attendees</h5>
               <div class="bg-secondary rounded p-3 text-center mb-3">
+                <div v-for="ticket in tickets" :key="ticket.id">
+                  <img :src="ticket.profile.picture" class="ticket-holder-picture" alt="">
+                  <p>{{ ticket.profile?.name }}</p>
+
+                </div>
 
               </div>
             </div>
@@ -156,6 +160,13 @@ onBeforeMount(() => {
 
 
 <style lang="scss" scoped>
+.ticket-holder-picture {
+  height: 3dvh;
+  border-radius: 50em;
+  background-position: center;
+  background-size: cover;
+}
+
 .cover-img {
   height: 25dvh;
   background-image: v-bind(bgImage);
