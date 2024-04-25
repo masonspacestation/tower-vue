@@ -7,6 +7,10 @@ import { api } from "./AxiosService.js"
 
 
 class TowerEventsService{
+  async getMyEvents() {
+    const response = await api.get('api/account/towerevents')
+    console.log('please', response.data);
+  }
 
   async deleteEvent(eventId) {
     const response = await api.delete(`api/events/${eventId}`)

@@ -1,3 +1,4 @@
+<!-- eslint-disable no-console -->
 <script setup>
 import { useRoute } from "vue-router";
 import Pop from "../utils/Pop.js";
@@ -6,7 +7,7 @@ import { computed, onBeforeMount, onMounted } from "vue";
 import { AppState } from "../AppState.js";
 import { ticketsService } from "../services/TicketsService.js";
 import CanceledIndicator from "../components/CanceledIndicator.vue";
-
+import SoldOutIndicator from "../components/SoldOutIndicator.vue";
 
 const route = useRoute()
 
@@ -16,6 +17,8 @@ const bgImage = computed(() => `url(${AppState.activeTowerEvent?.coverImg})`)
 const tickets = computed(() => AppState.tickets)
 const ticketHolder = computed(() => tickets.value.find(ticket => ticket.accountId == AppState.account?.id))
 const dateTime = computed(() => AppState.activeTowerEvent.startDate.toDateString())
+// const myTicket = computed(() => AppState.accountTickets)
+const remainingTickets = computed(() => towerEvent.value.capacity - towerEvent.value.ticketCount)
 
 async function getTowerEventById() {
   try {
@@ -60,10 +63,18 @@ async function createTicket() {
   }
 }
 
+// async function deleteTicket(ticketId) {
+//   try {
+//     const ticketData = await ticketsService.deleteTicket(ticketId)
+//   }
+//   catch (error) {
+//     Pop.toast('Error deleting ticket', 'error');
+//   }
+// }
+
 async function getTicketHolders() {
   try {
     const eventId = route.params.eventId
-
     await ticketsService.getTicketHolders(eventId)
   }
   catch (error) {
@@ -88,6 +99,7 @@ onBeforeMount(() => {
 
         <div class="col-10 w-100 rounded cover-img" alt="">
           <CanceledIndicator :towerEvent="towerEvent" />
+          <SoldOutIndicator :towerEvent="towerEvent" />
         </div>
         <!-- SECTION title -->
         <div class="row my-3 px-0 justify-content-start align-items-center">
@@ -130,14 +142,26 @@ onBeforeMount(() => {
 
           <!-- SECTION col-3 starting with ticket button -->
           <div class="col-4 ps-2">
-            <div class="bg-secondary rounded p-3 text-center mb-3">
-              <h5>Interested in going?</h5>
-              <p>Get a free ticket!</p>
-              <div v-if="!ticketHolder">
+            <div v-if="!ticketHolder">
+              <div class="bg-secondary rounded p-3 text-center mb-3">
+                <h5>Interested in going?</h5>
+                <p>Get a free ticket!</p>
+
+
                 <button class="btn w-100 btn-success" @click="createTicket()">Attend!</button>
               </div>
             </div>
-            <h6 class="w-100 text-end"><span class="text-success">{{ towerEvent.capacity }}</span> spots left</h6>
+
+            <div v-else>
+              <div class="bg-secondary rounded p-3 text-center mb-3">
+                <h5>You're Going!</h5>
+                <p>You're on the list, no physical tickets 👌</p>
+                <!-- <button class="btn w-100 btn-outline-success" @click="deleteTicket(tickets.)">Cancel</button> -->
+              </div>
+            </div>
+
+            <h6 class="w-100 text-end"><span class="text-success">{{ remainingTickets }}</span>
+              spots left</h6>
             <div>
               <h5>Attendees</h5>
               <div class="bg-secondary rounded p-3 text-center mb-3">

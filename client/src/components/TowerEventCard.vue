@@ -2,7 +2,7 @@
 import { computed } from "vue";
 import { TowerEvent } from "../models/TowerEvent.js";
 import CanceledIndicator from "./CanceledIndicator.vue";
-
+import SoldOutIndicator from "./SoldOutIndicator.vue";
 
 const props = defineProps({ towerEvent: { type: TowerEvent, required: true } })
 
@@ -45,6 +45,7 @@ const bgStyle = computed(() => `url(${props.towerEvent.coverImg})`)
           <!-- <div v-if="towerEvent?.isCanceled == true" class="row justify-content-end align-items-bottom">
             <span class="rounded bg-danger my-2 me-3 px-3 p-1 w-auto fs-6">CANCELED</span> -->
           <CanceledIndicator :towerEvent="towerEvent" />
+          <SoldOutIndicator :towerEvent="towerEvent" />
         </div>
       </div>
       <!-- </div> -->

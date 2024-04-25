@@ -27,6 +27,6 @@ export class TowerEvent{
     
     //virtual
     this.creator =  data.creator?  new Account(data.creator) : null
-    this.ticketCount = data.ticketCount ? new Ticket(data.ticketCount) : null
+    this.ticketCount = data.ticketCount ? data.ticketCount : null
   }
 }

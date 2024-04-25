@@ -5,8 +5,9 @@ import Pop from "../utils/Pop.js";
 import { AppState } from "../AppState.js";
 import ModalWrapper from "../components/ModalWrapper.vue";
 import NewEventForm from "../components/NewEventForm.vue";
+import TowerEventCard from "../components/TowerEventCard.vue";
 
-// const towerEvents = computed(() => AppState.towerEvents)
+
 const filterBy = ref('all')
 
 onMounted(() => {
