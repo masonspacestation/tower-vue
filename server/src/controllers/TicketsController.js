@@ -16,8 +16,8 @@ export class TicketsController extends BaseController {
 
   async createTicket(request, response, next) {
     try {
-      const user = request.userInfo
       const newTicketData = request.body
+      const user = request.userInfo
       newTicketData.accountId = user.id
       const newTicket = await ticketsService.createTicket(newTicketData)
       response.send(newTicket)

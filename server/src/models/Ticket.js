@@ -21,4 +21,3 @@ TicketSchema.virtual('event', {
   foreignField: '_id',
   justOne: true
 })
-
