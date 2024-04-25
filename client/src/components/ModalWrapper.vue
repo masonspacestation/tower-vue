@@ -23,7 +23,9 @@ defineProps({ modalId: String })
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          {{ modalId }}
+          <h3>
+            Host an event!
+          </h3>
         </div>
 
         <div class="modal-body">

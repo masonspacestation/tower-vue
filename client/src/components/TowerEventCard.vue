@@ -6,6 +6,30 @@ import { TowerEvent } from "../models/TowerEvent.js";
 const props = defineProps({ towerEvent: { type: TowerEvent, required: true } })
 
 const bgStyle = computed(() => `url(${props.towerEvent.coverImg})`)
+
+
+// const filters = [
+//   {
+//     name: 'all',
+//     icon: 'mdi mdi-earth'
+//   },
+//   {
+//     name: 'sport',
+//     icon: 'mdi mdi-soccer'
+//   },
+//   {
+//     name: 'convention',
+//     icon: `mdi mdi-account-group`
+//   },
+//   {
+//     name: 'digital',
+//     icon: 'mdi mdi-laptop'
+//   },
+//   {
+//     name: 'concert',
+//     icon: 'mdi mdi-guitar-electric'
+//   },
+// ]
 </script>
 
 
@@ -28,11 +52,10 @@ const bgStyle = computed(() => `url(${props.towerEvent.coverImg})`)
 
 <style lang="scss" scoped>
 .event-card {
-  height: 20dvh;
+  height: 15dvh;
   background-image: v-bind(bgStyle);
   background-position: center;
   background-size: cover;
-  text-decoration: none;
 }
 
 h4 {
