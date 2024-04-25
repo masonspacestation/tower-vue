@@ -141,9 +141,13 @@ onBeforeMount(() => {
             <div>
               <h5>Attendees</h5>
               <div class="bg-secondary rounded p-3 text-center mb-3">
-                <div v-for="ticket in tickets" :key="ticket.id">
-                  <img :src="ticket.profile.picture" class="ticket-holder-picture" alt="">
-                  <p>{{ ticket.profile?.name }}</p>
+                <div class="row justify-content-start align-items-center">
+                  <div v-for="ticket in tickets" :key="ticket.id">
+                    <img :src="ticket.profile.picture" class="ticket-holder-picture" alt="">
+                    <span>
+                      <p>{{ ticket.profile?.name }}</p>
+                    </span>
+                  </div>
 
                 </div>
 
