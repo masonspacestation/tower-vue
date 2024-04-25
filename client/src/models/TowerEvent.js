@@ -1,4 +1,5 @@
 import { Account } from "./Account.js"
+import { Ticket } from "./Ticket.js"
 
 
 
@@ -21,8 +22,11 @@ export class TowerEvent{
     //automatic
     this.id = data.id
     this.creatorId = data.creatorId
-    this.creator = new Account(data.creator)
     this.createdAt = new Date(data.createdAt)
     this.updatedAt = new Date(data.updatedAt)
+    
+    //virtual
+    this.creator =  data.creator?  new Account(data.creator) : null
+    this.ticketCount = data.ticketCount ? new Ticket(data.ticketCount) : null
   }
 }

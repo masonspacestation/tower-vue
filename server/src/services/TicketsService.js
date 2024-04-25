@@ -10,7 +10,7 @@ class TicketsService {
   }
   async createTicket(ticketData) {
     const newTicket = await dbContext.Tickets.create(ticketData)
-    await newTicket.populate('event profile')
+    await newTicket.populate('profile event')
     return newTicket
   }
 

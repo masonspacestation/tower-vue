@@ -1,4 +1,5 @@
 import { Account } from "./Account.js"
+import { Profile } from "./Profile.js"
 import { TowerEvent } from "./TowerEvent.js"
 
 
@@ -11,7 +12,7 @@ export class Ticket{
   this.eventId = data.eventId
   this.createdAt = new Date(data.createdAt)
   this.updatedAt = new Date(data.updatedAt)
-  this.profile = data.profile ? new Account(data.profile) : null
+  this.profile = data.profile ? new Profile(data.profile) : null
   this.event = data.event ? new TowerEvent(data.event) : null
 }
 }

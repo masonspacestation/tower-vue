@@ -60,8 +60,20 @@ async function createTicket() {
   }
 }
 
+async function getTicketHolders() {
+  try {
+    const eventId = route.params.eventId
+
+    await ticketsService.getTicketHolders(eventId)
+  }
+  catch (error) {
+    Pop.toast('Could not retrieve ticket holders', 'error');
+  }
+}
+
 onBeforeMount(() => {
   getTowerEventById()
+  getTicketHolders()
 })
 
 
