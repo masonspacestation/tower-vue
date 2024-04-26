@@ -6,7 +6,7 @@ import { Account } from "./Account.js"
 export class Comment{
   constructor(data){
     this.id = data.id
-    // this.creatorId = data.creatorId
+    this.creatorId = data.creatorId
     this.eventId = data.eventId
     
     // from db
@@ -15,7 +15,8 @@ export class Comment{
     this.updatedAt = new Date(data.updatedAt)
 
     // virtual
-    this.creatorId = data.creatorId ? new Account(data.creatorId) : null
+    // FIXME this is just a string, convert the creator into your account model
+    this.creator = data.creator ? new Account(data.creator) : null
   }
 
 }

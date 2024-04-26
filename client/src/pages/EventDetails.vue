@@ -151,7 +151,8 @@ onBeforeMount(() => {
 
               <div v-for="comment in comments" :key="comment.id">
                 <!-- <div v-for="ticket in tickets" :key="ticket.id"> -->
-                <CommentCard :comments="comment.body" />
+                <!-- FIXME make sure you are passing a value for your comment prop, and pass down the whole object for it's value -->
+                <CommentCard :comment="comment" />
               </div>
             </div>
           </div>

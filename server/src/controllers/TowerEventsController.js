@@ -49,7 +49,10 @@ export class TowerEventsController extends BaseController {
     try {
       const eventId = request.params.eventId
       const eventData = request.body
-      const towerEvent = await towerEventsService.editEvent(eventId, eventData)
+      const userId = request.userInfo.id
+      eventData.id = eventId
+      // FIXME get the userInfo of the person making thisa request, send their id down to the service
+      const towerEvent = await towerEventsService.editEvent(eventData, userId)
       response.send(towerEvent)
     } catch (error) {
       next(error)

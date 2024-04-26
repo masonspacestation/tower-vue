@@ -28,10 +28,17 @@ class TowerEventsService {
   }
 
 
-  async editEvent(eventId, eventData) {
+  async editEvent(eventData, userId) {
     // const eventToUpdate = await this.getTowerEventById(eventId)
 
-    const eventToUpdate = await dbContext.TowerEvents.findById(eventId)
+    const eventToUpdate = await dbContext.TowerEvents.findById(eventData.id)
+
+    // FIXME Use userId to validate they are the owner of eventToUpdate
+    if (eventToUpdate.creatorId != userId) throw new Forbidden(`You cannot decide what to do at somebody else's party`)
+
+
+    // FIXME See if event is cancelled, if it is throw an error
+    if (eventToUpdate.isCanceled == true) throw new Error(`That event has been canceled, and cannot be modified`)
 
     eventToUpdate.name = eventData.name ?? eventToUpdate.name
     eventToUpdate.description = eventData.description ?? eventToUpdate.description

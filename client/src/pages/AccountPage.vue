@@ -35,6 +35,7 @@ async function getMyEvents() {
       <div class="container">
         <div class="row">
           <section v-for="ticket in accountTickets" :key="ticket.id" class="col-6 col-md-4">
+            <!-- FIXME reference Mick's album collaborations on his account page for delete -->
             <TowerEventCard :towerEvent="ticket.event" />
             <!-- {{ accountTickets. }} -->
           </section>

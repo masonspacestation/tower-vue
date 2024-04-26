@@ -14,7 +14,7 @@ class CommentsService {
 
     await commentToDelete.populate('creator')
     await commentToDelete.deleteOne()
-    await commentToDelete.save()
+
     return `Comment ${commentToDelete.body} has been deleted.`
   }
 
