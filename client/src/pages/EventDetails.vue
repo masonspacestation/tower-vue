@@ -170,14 +170,14 @@ onBeforeMount(() => {
               </div>
             </div>
 
-            <div v-else-if="ticketHolder">
+            <div v-else-if="ticketHolder && !towerEvent.isCanceled">
               <div class="bg-secondary rounded p-3 text-center mb-3">
                 <h5>You're Going!</h5>
                 <p>You're on the list, just show up 👌</p>
               </div>
             </div>
 
-            <div v-else-if="!account">
+            <div v-else-if="!account && !towerEvent.isCanceled && remainingTickets">
               <div class="bg-secondary rounded p-3 text-center mb-3">
                 <h5>Want to join?</h5>
                 <p>Log in to get a ticket.</p>
