@@ -8,6 +8,9 @@ import { AppState } from "../AppState.js";
 import { ticketsService } from "../services/TicketsService.js";
 import CanceledIndicator from "../components/CanceledIndicator.vue";
 import SoldOutIndicator from "../components/SoldOutIndicator.vue";
+import CommentForm from "../components/CommentForm.vue";
+import { commentsService } from "../services/CommentsService.js";
+import CommentCard from "../components/CommentCard.vue";
 
 const route = useRoute()
 
@@ -15,6 +18,7 @@ const towerEvent = computed(() => AppState.activeTowerEvent)
 const account = computed(() => AppState.account)
 const bgImage = computed(() => `url(${AppState.activeTowerEvent?.coverImg})`)
 const tickets = computed(() => AppState.tickets)
+const comments = computed(() => AppState.eventComments)
 const ticketHolder = computed(() => tickets.value.find(ticket => ticket.accountId == AppState.account?.id))
 const dateTime = computed(() => AppState.activeTowerEvent.startDate.toDateString())
 // const myTicket = computed(() => AppState.accountTickets)
@@ -82,9 +86,19 @@ async function getTicketHolders() {
   }
 }
 
+async function getEventComments() {
+  try {
+    const eventId = route.params.eventId
+    await commentsService.getEventComments(eventId)
+  } catch (error) {
+    Pop.toast('Could not get comments for event', 'error')
+  }
+}
+
 onBeforeMount(() => {
   getTowerEventById()
   getTicketHolders()
+  getEventComments()
 })
 
 
@@ -94,7 +108,7 @@ onBeforeMount(() => {
 <template>
   <section v-if="towerEvent">
 
-    <div class="container mt-3">
+    <div class="container px-2 px-md-0 mt-3">
       <section class="row justify-content-center">
 
         <div class="col-10 w-100 rounded cover-img" alt="">
@@ -111,38 +125,42 @@ onBeforeMount(() => {
           <div class="col-3">
             <button class="btn w-100 btn-outline-warning" @click="cancelEvent()">Cancel Event</button>
           </div>
-          <div class="col-3">
+          <!-- <div class="col-3">
             <button class="btn w-100 btn-outline-danger" @click="deleteEvent()">Delete Event</button>
-          </div>
+          </div> -->
         </div>
 
 
-        <div class="row px-0 my-3 justify-content-between align-items-start">
+        <div class="row px-4 p-md-0 my-3 justify-content-between align-items-start">
           <!-- SECTION col-8 starting with description -->
-          <div class="col-8 pe-2">
+          <div class="order-2 order-md-1 col-md-8 pe-2">
             <p>{{ towerEvent.description }}</p>
             <div id="event-details" class="mb-5">
               <h5>Event Date</h5>
               <h6><i class="mdi mdi-calendar me-2 text-info fs-4"></i> {{ dateTime }}</h6>
               <h5>Location</h5>
-              <h6><i class="mdi mdi-map-marker me-2 text-info fs-4"></i> {{ dateTime }}</h6>
+              <h6><i class="mdi mdi-map-marker me-2 text-info fs-4"></i> {{ towerEvent.location }}</h6>
             </div>
+
 
             <div class="bg-secondary rounded p-3 text-center mb-3">
-              <h5>See what folks are saying. . .</h5>
+              <h5 class="mb-3">See what folks are saying. . .</h5>
+              <div class="w-75 m-auto">
+                <CommentForm />
+              </div>
+
+              <div v-for="comment in comments" :key="comment.id">
+                <!-- <div v-for="ticket in tickets" :key="ticket.id"> -->
+                <CommentCard :comments="comment.body" />
+              </div>
             </div>
-
-
           </div>
 
 
 
-
-
-
           <!-- SECTION col-3 starting with ticket button -->
-          <div class="col-4 ps-2">
-            <div v-if="!ticketHolder">
+          <div class="order-1 order-md-2 col-md-4 ps-2">
+            <div v-if="!ticketHolder && !towerEvent.isCanceled && remainingTickets != 0 && account">
               <div class="bg-secondary rounded p-3 text-center mb-3">
                 <h5>Interested in going?</h5>
                 <p>Get a free ticket!</p>
@@ -152,11 +170,33 @@ onBeforeMount(() => {
               </div>
             </div>
 
-            <div v-else>
+            <div v-else-if="ticketHolder">
               <div class="bg-secondary rounded p-3 text-center mb-3">
                 <h5>You're Going!</h5>
-                <p>You're on the list, no physical tickets 👌</p>
-                <!-- <button class="btn w-100 btn-outline-success" @click="deleteTicket(tickets.)">Cancel</button> -->
+                <p>You're on the list, just show up 👌</p>
+              </div>
+            </div>
+
+            <div v-else-if="!account">
+              <div class="bg-secondary rounded p-3 text-center mb-3">
+                <h5>Want to join?</h5>
+                <p>Log in to get a ticket.</p>
+              </div>
+            </div>
+
+            <div v-else-if="towerEvent.isCanceled">
+              <div class="bg-secondary rounded p-3 text-center mb-3">
+                <h5>This event has been canceled</h5>
+                <p>Womp womp</p>
+                <CanceledIndicator :towerEvent="towerEvent" />
+              </div>
+            </div>
+
+            <div v-else-if="remainingTickets <= 0">
+              <div class="bg-secondary rounded p-3 text-center mb-3">
+                <h5>This event has sold out!</h5>
+                <p>Try to catch it next time.</p>
+                <SoldOutIndicator :towerEvent="towerEvent" />
               </div>
             </div>
 
@@ -178,12 +218,12 @@ onBeforeMount(() => {
               </div>
             </div>
           </div>
+
         </div>
       </section>
-
-      <!-- </section> -->
     </div>
   </section>
+
 </template>
 
 

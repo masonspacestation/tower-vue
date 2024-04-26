@@ -19,7 +19,8 @@ accountTickets: [],
 towerEvents:[],
 
 /**@type {TowerEvent} */
-activeTowerEvent: null
+activeTowerEvent: null,
 
-
+/**@type {Comment[]} */
+eventComments: []
 })

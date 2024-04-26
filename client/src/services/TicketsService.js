@@ -23,6 +23,7 @@ class TicketsService{
     const response = await api.post('api/tickets', eventData)
     console.log('New Ticket', response.data);
     const ticket = new Ticket(response.data);
+    // AppState.activeTowerEvent.ticketCount.push(ticket) //this line gave me the error "null reading 'push'". I was trying this to have the remaining ticket count on the eventdetails page update when I grab a ticket
     AppState.tickets.push(ticket)
   }
 

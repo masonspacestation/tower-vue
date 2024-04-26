@@ -59,9 +59,13 @@ const filters = [
 <template>
   <section class="container-fluid">
     <div class="row hero-section align-items-end">
-      <div class="mb-5 col-6 p-5">
-        <h2 class="text-white">Event management for people by people</h2>
-        <p class="text-white">Whatever your interest, from hiking and reading to networking and skill sharing, there are
+      <div class="mb-5 col-12 col-sm-6 p-5">
+        <h2 class="d-none d-md-block text-white">Event management for people by people</h2>
+        <h1 class="d-xs-block d-md-none text-white">Event management for people by people</h1>
+        <p class="d-none d-sm-none d-md-block text-white">Whatever your interest, from hiking and reading to
+          networking and
+          skill sharing,
+          there are
           thousands of
           people who share it on Tower. Events are happening every day—log in to join the fun.</p>
       </div>
@@ -70,12 +74,12 @@ const filters = [
     <section class="container mt-5">
       <h3 class="text-start">How Tower Works</h3>
       <section class="row justify-content-around my-5">
-        <div class="col-5 p-3 bg-secondary">
+        <div class="col-12 col-md-5 mb-3 p-3 bg-secondary">
           <h5><i class="mdi mdi-dice-multiple-outline text-success me-2 fs-3"></i> Roll the dice</h5>
           <p>Find out about events happening near you.</p>
 
         </div>
-        <div class="col-5 p-3 bg-secondary">
+        <div class="col-12 col-md-5 mb-3 p-3 bg-secondary">
           <h5><i class="mdi mdi-plus text-success me-2 fs-3"></i> Host an event</h5>
           <p>Meet new folks or invite your fram.</p>
           <button type="button" class="btn btn-font fw-bold text-success" data-bs-toggle="modal"
@@ -91,7 +95,7 @@ const filters = [
 
       <h3 class="text-start">Explore top categories</h3>
       <div class="row justify-content-center g-3 my-3">
-        <div class="col-2" v-for="filterObj in filters" :key="filterObj.type">
+        <div class="col-6 col-md-2" v-for="filterObj in filters" :key="filterObj.type">
           <div role="button" class="btn btn-secondary w-100 rounded px-4 py-2" @click="filterBy = filterObj.name">
             <i :class="`${filterObj.icon}`"></i>
             <h5 class="text-center">{{ filterObj.name }}</h5>
@@ -105,12 +109,10 @@ const filters = [
       <section class="row">
         <h3 class="text-start mt-5">Upcoming Events <span class="fs-5">({{ AppState.towerEvents.length }})</span></h3>
       </section>
-      <section class="row p-5">
+      <section class="row p-md-5">
 
-        <section class="col-4" v-for="towerEvent in towerEvents" :key="towerEvent.id">
+        <section class="col-6 col-md-4" v-for="towerEvent in towerEvents" :key="towerEvent.id">
           <TowerEventCard :towerEvent="towerEvent" />
-
-
         </section>
       </section>
 

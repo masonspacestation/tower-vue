@@ -34,7 +34,7 @@ async function getMyEvents() {
 
       <div class="container">
         <div class="row">
-          <section v-for="ticket in accountTickets" :key="ticket.id" class="col-4">
+          <section v-for="ticket in accountTickets" :key="ticket.id" class="col-6 col-md-4">
             <TowerEventCard :towerEvent="ticket.event" />
             <!-- {{ accountTickets. }} -->
           </section>
