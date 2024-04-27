@@ -44,12 +44,12 @@ const bgStyle = computed(() => `url(${props.towerEvent.coverImg})`)
         <div class="row justify-content-start align-items-end">
           <!-- <div v-if="towerEvent?.isCanceled == true" class="row justify-content-end align-items-bottom">
             <span class="rounded bg-danger my-2 me-3 px-3 p-1 w-auto fs-6">CANCELED</span> -->
-          <CanceledIndicator :towerEvent="towerEvent" />
-          <SoldOutIndicator :towerEvent="towerEvent" />
         </div>
       </div>
       <!-- </div> -->
       <h4 class="my-2 fs-5 fw-medium">{{ towerEvent.name }}</h4>
+      <CanceledIndicator :towerEvent="towerEvent" />
+      <SoldOutIndicator :towerEvent="towerEvent" />
     </section>
 
   </RouterLink>

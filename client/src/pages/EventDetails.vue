@@ -113,8 +113,10 @@ onBeforeMount(() => {
       <section class="row justify-content-center">
 
         <div class="col-10 w-100 rounded cover-img" alt="">
-          <CanceledIndicator :towerEvent="towerEvent" />
-          <SoldOutIndicator :towerEvent="towerEvent" />
+          <div class="d-flex align-items-start flex-column mb-auto">
+            <CanceledIndicator :towerEvent="towerEvent" />
+            <SoldOutIndicator :towerEvent="towerEvent" />
+          </div>
         </div>
         <!-- SECTION title -->
         <div class="row my-3 px-0 justify-content-start align-items-center">
