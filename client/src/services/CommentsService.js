@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { AppState } from "../AppState.js";
 import { Comment } from "../models/Comment.js";
 import { api } from "./AxiosService.js"

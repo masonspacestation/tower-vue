@@ -1,7 +1,7 @@
+<!-- eslint-disable no-console -->
 <script setup>
 import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
-import { towerEventsService } from "../services/TowerEventsService.js";
 import { ticketsService } from "../services/TicketsService.js";
 import Pop from "../utils/Pop.js";
 
@@ -15,12 +15,33 @@ onMounted(() =>
 
 async function getMyEvents() {
   try {
-    const myEvents = await ticketsService.getMyTickets()
+    await ticketsService.getMyTickets()
   }
   catch (error) {
     Pop.toast('Could not get your events', 'error');
+    console.error(error)
   }
 }
+
+async function deleteTicket(ticketId) {
+  try {
+    await ticketsService.deleteTicket(ticketId)
+  } catch (error) {
+    Pop.toast('Could not delete your ticket', 'error')
+    console.error(error)
+  }
+}
+
+/**
+ * async function deleteCollaboration(collaborationId){
+  try {
+    await collaboratorsService.deleteCollaboration(collaborationId)
+  } catch (error) {
+    Pop.toast("Could note leave album", 'error')
+    console.error(error);
+  }
+}
+ */
 
 
 </script>
@@ -37,6 +58,9 @@ async function getMyEvents() {
           <section v-for="ticket in accountTickets" :key="ticket.id" class="col-6 col-md-4">
             <!-- FIXME reference Mick's album collaborations on his account page for delete -->
             <TowerEventCard :towerEvent="ticket.event" />
+
+            <button @click="deleteTicket(ticket.id)" class="btn btn-outline-danger">Delete Ticket</button>
+
             <!-- {{ accountTickets. }} -->
           </section>
         </div>

@@ -7,6 +7,15 @@ import { api } from "./AxiosService.js"
 
 
 class TicketsService{
+  async deleteTicket(ticketId) {
+    const response = await api.delete(`api/tickets/${ticketId}`)
+    console.log('deleting ticket', response.data);
+    const ticketIndex = AppState.accountTickets.findIndex(ticket => ticket.id == ticketId)
+
+    if(ticketIndex == -1) throw new Error('Error with find index funtion')
+    // AppState.activeTowerEvent.ticketCount--
+    AppState.accountTickets.splice(ticketIndex, 1)
+  }
   async getMyTickets() {
     const response = await api.get('account/tickets')
     console.log('my tickets', response.data);

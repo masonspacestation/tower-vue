@@ -5,9 +5,7 @@ import { Comment } from "../models/Comment.js";
 import { Account } from "../models/Account.js";
 import { commentsService } from "../services/CommentsService.js";
 import Pop from "../utils/Pop.js";
-import { useRoute } from "vue-router";
 
-const route = useRoute()
 
 const props = defineProps({ comment: { type: Comment, required: true } })
 const account = computed(() => AppState.account)
@@ -17,6 +15,7 @@ async function deleteComment(commentId) {
     await commentsService.deleteComment(commentId)
   } catch (error) {
     Pop.toast('Could not delete comments', 'error')
+    console.error(error)
   }
 
 }

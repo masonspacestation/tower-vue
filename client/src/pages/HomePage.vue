@@ -95,10 +95,10 @@ const filters = [
 
       <h3 class="text-start">Explore top categories</h3>
       <div class="row justify-content-center g-3 my-3">
-        <div class="col-6 col-md-2" v-for="filterObj in filters" :key="filterObj.type">
-          <div role="button" class="btn btn-secondary w-100 rounded px-4 py-2" @click="filterBy = filterObj.name">
+        <div class="text-center col-8 col-md-2" v-for="filterObj in filters" :key="filterObj.type">
+          <div role="button" class="btn btn-secondary w-100 rounded px-0 py-2" @click="filterBy = filterObj.name">
             <i :class="`${filterObj.icon}`"></i>
-            <h5 class="text-center">{{ filterObj.name }}</h5>
+            <h6 class="d-none d-md-block text-center">{{ filterObj.name }}</h6>
           </div>
         </div>
       </div>

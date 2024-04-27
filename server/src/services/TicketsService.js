@@ -12,7 +12,7 @@ class TicketsService {
 
     await ticketToDelete.populate('profile')
     await ticketToDelete.deleteOne()
-    await ticketToDelete.save()
+
     return `Ticket ${ticketToDelete} has been deleted.`
   }
   async getMyTickets(userId) {

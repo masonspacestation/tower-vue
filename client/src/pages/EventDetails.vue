@@ -11,6 +11,7 @@ import SoldOutIndicator from "../components/SoldOutIndicator.vue";
 import CommentForm from "../components/CommentForm.vue";
 import { commentsService } from "../services/CommentsService.js";
 import CommentCard from "../components/CommentCard.vue";
+import DeleteTicketButton from "../components/DeleteTicketButton.vue";
 
 const route = useRoute()
 
@@ -150,7 +151,7 @@ onBeforeMount(() => {
               </div>
 
               <div v-for="comment in comments" :key="comment.id">
-                <!-- <div v-for="ticket in tickets" :key="ticket.id"> -->
+
                 <!-- FIXME make sure you are passing a value for your comment prop, and pass down the whole object for it's value -->
                 <CommentCard :comment="comment" />
               </div>
@@ -175,6 +176,7 @@ onBeforeMount(() => {
               <div class="bg-secondary rounded p-3 text-center mb-3">
                 <h5>You're Going!</h5>
                 <p>You're on the list, just show up 👌</p>
+                <!-- <DeleteTicketButton :towerEvent="towerEvent" /> -->
               </div>
             </div>
 
