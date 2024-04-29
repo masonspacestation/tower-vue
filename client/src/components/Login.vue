@@ -15,18 +15,17 @@ async function logout() {
 </script>
 
 <template>
-  template>
   <span class="navbar-text">
-    <button class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0" @click="login"
-      v-if="!user?.isAuthenticated">
+    <button class="btn selectable text-success lighten-30 text-uppercase" @click="login" v-if="!user?.isAuthenticated">
       Login
     </button>
     <div v-else>
-      <div class="dropdown my-2 my-lg-0">
-        <div type="button" class="bg-dark border-0 selectable no-select" data-bs-toggle="dropdown"
+      <div class="dropdown">
+        <div type="button" class="bg-border-0 selectable no-select px-4" data-bs-toggle="dropdown"
           aria-expanded="false">
           <div v-if="account?.picture || user?.picture">
-            <img :src="account?.picture || user?.picture" alt="account photo" height="40" class="rounded" />
+            <img :src="account?.picture || user?.picture" alt="account photo" height="40" class="login-picture" />
+            <h6 class="ms-3 d-none d-sm-inline">{{ account?.name }}</h6>
           </div>
         </div>
         <div class="dropdown-menu dropdown-menu-sm-start dropdown-menu-start p-0" aria-labelledby="authDropdown">
@@ -47,4 +46,13 @@ async function logout() {
   </span>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.login-picture {
+  height: 5dvh;
+  aspect-ratio: 1/1;
+  border-radius: 50em;
+  background-position: center;
+  background-size: cover;
+  border: 2px solid rgb(203, 142, 10)
+}
+</style>

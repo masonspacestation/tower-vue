@@ -81,6 +81,8 @@ darken($value, calc($color-variation / 2)))
 
 ;
 
+
+
 .text-#{$color} {
   --bs-color: #{$value};
 }
@@ -161,5 +163,11 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
 [data-bs-theme="dark"] {
   @include generate-theme-properties("dark", $dark-theme);
 }
+
+$utilities: map-merge($utilities,
+    ("font-size": map-merge(map-get($utilities, "font-size"),
+        (responsive: true),
+      ),
+    ));
 
 @debug "[sass_success] Themes_Built";

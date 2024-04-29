@@ -13,6 +13,8 @@ import { commentsService } from "../services/CommentsService.js";
 import CommentCard from "../components/CommentCard.vue";
 import DeleteTicketButton from "../components/DeleteTicketButton.vue";
 
+
+
 const route = useRoute()
 
 const towerEvent = computed(() => AppState.activeTowerEvent)
@@ -113,25 +115,25 @@ onBeforeMount(() => {
       <section class="row justify-content-center">
 
         <div class="col-10 w-100 rounded cover-img" alt="">
-          <div class="d-flex align-items-start flex-column mb-auto">
-            <CanceledIndicator :towerEvent="towerEvent" />
-            <SoldOutIndicator :towerEvent="towerEvent" />
-          </div>
         </div>
         <!-- SECTION title -->
         <div class="row my-3 px-0 justify-content-start align-items-center">
           <h2 class="w-auto my-2 me-3">{{ towerEvent.name }}</h2>
-          <span class="rounded bg-success my-2 me-3 px-3 p-1 w-auto fs-6">{{ towerEvent.type }}</span>
+          <span class="rounded bg-success my-2  mx-3 px-3 p-1 w-auto fs-6">{{ towerEvent.type }}</span>
         </div>
 
-        <div v-if="towerEvent.creator.id == account?.id" class="row">
-          <div class="col-3">
-            <button class="btn w-100 btn-outline-warning" @click="cancelEvent()">Cancel Event</button>
-          </div>
-          <!-- <div class="col-3">
-            <button class="btn w-100 btn-outline-danger" @click="deleteEvent()">Delete Event</button>
-          </div> -->
+        <div class="row my-3 px-0 justify-content-start align-items-center">
+          <p class="w-auto my-2 me-3"><span>
+              <CanceledIndicator :towerEvent="towerEvent" />
+              <SoldOutIndicator :towerEvent="towerEvent" />
+            </span> Hosted by <span class="fw-bold">
+              <!-- <RouterLink :to="{ name: 'Profile', params: { profielId: towerEvent.creator.id } }"> -->
+              {{ towerEvent.creator.name }}
+              <!-- </RouterLink> -->
+            </span>
+          </p>
         </div>
+
 
 
         <div class="row px-4 p-md-0 my-3 justify-content-between align-items-start">
@@ -152,7 +154,7 @@ onBeforeMount(() => {
                 <CommentForm />
               </div>
 
-              <div v-for="comment in comments" :key="comment.id">
+              <div class="w-75 m-auto" v-for="comment in comments" :key="comment.id">
 
                 <!-- FIXME make sure you are passing a value for your comment prop, and pass down the whole object for it's value -->
                 <CommentCard :comment="comment" />
@@ -193,7 +195,6 @@ onBeforeMount(() => {
               <div class="bg-secondary rounded p-3 text-center mb-3">
                 <h5>This event has been canceled</h5>
                 <p>Womp womp</p>
-                <CanceledIndicator :towerEvent="towerEvent" />
               </div>
             </div>
 
@@ -201,25 +202,37 @@ onBeforeMount(() => {
               <div class="bg-secondary rounded p-3 text-center mb-3">
                 <h5>This event has sold out!</h5>
                 <p>Try to catch it next time.</p>
-                <SoldOutIndicator :towerEvent="towerEvent" />
               </div>
             </div>
 
             <h6 class="w-100 text-end"><span class="text-success">{{ remainingTickets }}</span>
               spots left</h6>
             <div>
-              <h5>Attendees</h5>
-              <div class="bg-secondary rounded p-3 text-center mb-3">
-                <div class="row justify-content-start align-items-center">
-                  <div v-for="ticket in tickets" :key="ticket.id">
-                    <img :src="ticket.profile.picture" class="ticket-holder-picture" alt="">
-                    <span>
-                      <p>{{ ticket.profile?.name }}</p>
-                    </span>
-                  </div>
 
+
+              <div v-if="towerEvent.creator.id == account?.id && !towerEvent.isCanceled"
+                class="row justify-content-center my-5">
+                <div class="col-10">
+                  <button class="btn w-100 btn-outline-danger opacity-50" @click="cancelEvent()">Cancel Event</button>
                 </div>
+                <!-- <div class="col-3">
+                    <button class="btn w-100 btn-outline-danger" @click="deleteEvent()">Delete Event</button>
+                  </div> -->
+              </div>
 
+              <div v-if="tickets" class="mb-4">
+
+                <h5>Attendees</h5>
+                <div class="bg-secondary rounded p-3 text-center mb-3">
+                  <div class="row justify-content-start align-items-center">
+                    <div v-for="ticket in tickets" :key="ticket.id">
+                      <img :src="ticket.profile.picture" class="ticket-holder-picture" alt="">
+                      <span>
+                        <p>{{ ticket.profile?.name }}</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

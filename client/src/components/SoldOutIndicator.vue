@@ -12,9 +12,7 @@ const remainingTickets = computed(() => props.towerEvent.capacity - props.towerE
 
 
 <template>
-  <div v-if="remainingTickets <= 0" class="row justify-content-end align-items-bottom">
-    <span class="rounded bg-info my-2 me-3 px-3 p-1 w-auto fs-6">Sold Out</span>
-  </div>
+  <small v-if="remainingTickets <= 0" class="rounded bg-info text-white my-2 me-3 px-3 p-1 w-auto">Sold Out</small>
 </template>
 
 

@@ -25,7 +25,7 @@ async function getEvents() {
   }
 }
 
-
+const towerEvent = computed(() => AppState.towerEvents)
 
 const towerEvents = computed(() => {
   if (filterBy.value == 'all') return AppState.towerEvents
@@ -35,23 +35,33 @@ const towerEvents = computed(() => {
 const filters = [
   {
     name: 'all',
-    icon: 'mdi mdi-earth'
+    title: 'All',
+    icon: 'earth'
+    // icon: 'mdi mdi-earth'
   },
   {
     name: 'sport',
-    icon: 'mdi mdi-soccer'
+    title: 'Sport',
+    icon: 'soccer'
+    // icon: 'mdi mdi-soccer'
   },
   {
     name: 'convention',
-    icon: `mdi mdi-account-group`
+    title: 'Convention',
+    icon: `account-group`
+    // icon: `mdi mdi-account-group`
   },
   {
     name: 'digital',
-    icon: 'mdi mdi-laptop'
+    title: 'Digital',
+    icon: 'laptop'
+    // icon: 'mdi mdi-laptop'
   },
   {
     name: 'concert',
-    icon: 'mdi mdi-guitar-electric'
+    title: 'Concert',
+    icon: 'guitar-electric'
+    // icon: 'mdi mdi-guitar-electric'
   },
 ]
 </script>
@@ -59,10 +69,10 @@ const filters = [
 <template>
   <section class="container-fluid">
     <div class="row hero-section align-items-end">
-      <div class="mb-5 col-12 col-sm-6 p-5">
+      <div class="mb-5 col-12 col-md-6 p-5">
         <h2 class="d-none d-md-block text-white">Event management for people by people</h2>
         <h1 class="d-xs-block d-md-none text-white">Event management for people by people</h1>
-        <p class="d-none d-sm-none d-md-block text-white">Whatever your interest, from hiking and reading to
+        <p class="d-none d-xs-none d-md-block text-white">Whatever your interest, from hiking and reading to
           networking and
           skill sharing,
           there are
@@ -96,12 +106,24 @@ const filters = [
       <h3 class="text-start">Explore top categories</h3>
       <div class="row justify-content-center g-3 my-3">
         <div class="text-center col-8 col-md-2" v-for="filterObj in filters" :key="filterObj.type">
-          <div role="button" class="btn btn-secondary w-100 rounded px-0 py-2" @click="filterBy = filterObj.name">
-            <i :class="`${filterObj.icon}`"></i>
-            <h6 class="d-none d-md-block text-center">{{ filterObj.name }}</h6>
+          <div role="button" class="btn btn-secondary w-100 rounded px-0 py-2" @click="filterBy = filterObj.title">
+            <div class="d-md-none">
+              <i :class="`fs-3 mdi mdi-${filterObj.icon}`"></i><span class="fw-bold ms-3">{{ filterObj.title
+                }}</span>
+            </div>
+            <div class="d-none d-md-block">
+              <i :class="`fs-4 mdi mdi-${filterObj.icon}`"></i>
+              <h6 class="d-block fw-bold text-center">{{ filterObj.title }}</h6>
+            </div>
           </div>
         </div>
+        <!-- I wanted to create a 2-column layout at smaller sizes -->
+        <!-- <div class="d-md-none col-4" v-for="filterObj in filters" :key="filterObj.type">
+          <div class="">{{ filterObj.name }}
+          </div> -->
       </div>
+
+
 
 
 

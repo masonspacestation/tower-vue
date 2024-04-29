@@ -65,6 +65,7 @@ const bgStyle = computed(() => `url(${props.towerEvent.coverImg})`)
 }
 
 h4 {
+  color: rgb(51, 51, 51);
   text-decoration: none;
 }
 </style>

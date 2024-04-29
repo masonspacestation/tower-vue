@@ -36,9 +36,8 @@ async function createNewComment() {
 
     <form @submit.prevent="createNewComment()">
       <div class="row justify-content-end">
-        <textarea class="w-100 p-4 p-md-0" v-model="liveCommentData.body" name="" id=""
-          rows="3">Leave a comment</textarea>
-        <button class="btn btn-info w-25 my-3 rounded">Comment</button>
+        <textarea class="w-100 p-4" v-model="liveCommentData.body" name="" id="" rows="3">Leave a comment</textarea>
+        <button class="btn btn-info w-auto my-3 rounded">Comment</button>
       </div>
     </form>
   </div>
