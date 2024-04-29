@@ -28,7 +28,7 @@ async function deleteComment(commentId) {
 
 
 <template>
-  <div class="row mt-5">
+  <div class="row">
     <div class="card mb-3">
       <section class="container">
 
