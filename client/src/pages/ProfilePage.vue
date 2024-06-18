@@ -54,14 +54,10 @@ async function deleteTicket(ticketId) {
       <p>{{ account.email }}</p>
 
       <div class="container">
-        <div class="row">
+        <div class="row mb-2">
           <section v-for="ticket in accountTickets" :key="ticket.id" class="col-6 col-md-4">
-            <!-- FIXME reference Mick's album collaborations on his account page for delete -->
             <TowerEventCard :towerEvent="ticket.event" />
-
             <button @click="deleteTicket(ticket.id)" class="btn btn-outline-danger">Delete Ticket</button>
-
-            <!-- {{ accountTickets. }} -->
           </section>
         </div>
       </div>

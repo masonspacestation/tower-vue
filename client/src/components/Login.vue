@@ -28,7 +28,7 @@ async function logout() {
             <h6 class="ms-3 d-none d-sm-inline">{{ account?.name }}</h6>
           </div>
         </div>
-        <div class="dropdown-menu dropdown-menu-sm-start dropdown-menu-start p-0" aria-labelledby="authDropdown">
+        <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-end p-0" aria-labelledby="authDropdown">
           <div class="list-group">
             <router-link :to="{ name: 'Account' }">
               <div class="list-group-item dropdown-item list-group-item-action">

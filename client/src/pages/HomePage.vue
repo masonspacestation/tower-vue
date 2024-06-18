@@ -90,22 +90,21 @@ const filters = [
 
         </div>
         <div class="col-12 col-md-5 mb-3 p-3 bg-secondary">
-          <h5><i class="mdi mdi-plus text-success me-2 fs-3"></i> Host an event</h5>
+          <h5><i class="mdi mdi-calendar text-success me-2 fs-3"></i> Host an event</h5>
           <p>Meet new folks or invite your fram.</p>
-          <button type="button" class="btn btn-font fw-bold text-success" data-bs-toggle="modal"
-            data-bs-target="#create-event-modal">
+          <button type="button" class="btn btn-font border-success border-2 fw-bold text-success" data-bs-toggle="modal"
+            data-bs-target="#create-event-modal"><i class="mdi mdi-plus text-success me-2 my-0 fs-3"></i>
             New event
           </button>
         </div>
-        <!-- <NewEventForm /> -->
       </section>
 
 
 
 
-      <h3 class="text-start">Explore top categories</h3>
+      <h3 class="container text-start">Explore top categories</h3>
       <div class="row justify-content-center g-3 my-3">
-        <div class="text-center col-8 col-md-2" v-for="filterObj in filters" :key="filterObj.name">
+        <div class="text-center col-12 col-md-2" v-for="filterObj in filters" :key="filterObj.name">
           <div role="button" class="btn btn-secondary w-100 rounded px-0 py-2" @click="filterBy = filterObj.name">
             <div class="d-md-none">
               <i :class="`fs-3 mdi mdi-${filterObj.icon}`"></i><span class="fw-bold ms-3">{{ filterObj.title

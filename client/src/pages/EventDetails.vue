@@ -28,6 +28,7 @@ const dateTime = computed(() => AppState.activeTowerEvent.startDate.toDateString
 const remainingTickets = computed(() => towerEvent.value.capacity - towerEvent.value.ticketCount)
 
 async function getTowerEventById() {
+  AppState.activeTowerEvent = null
   try {
     await towerEventsService.getTowerEventById(route.params.eventId)
   } catch (error) {
@@ -45,6 +46,8 @@ async function deleteEvent() {
 
 async function cancelEvent() {
   try {
+    const wantsToCancel = await Pop.confirm('Are you sure you want to cancel this rad event? People might get sad')
+    if (!wantsToCancel) { return }
     // const eventId = route.params.eventId
     await towerEventsService.cancelEvent(route.params.eventId)
   } catch (error) {
